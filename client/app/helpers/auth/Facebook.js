@@ -18,7 +18,6 @@ define( [ 'facebookuser' ],
 
       user.on('facebook:connected', function(model, response) {
         console.log( "facebook:connected" );
-        alert( 'hellow FB user ');
       });
 
       user.on('facebook:disconnected', function(model, response) {
