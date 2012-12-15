@@ -4,16 +4,16 @@ define(
     
     var Navigation = Backbone.Router.extend( {
       routes: {
-        ':category': 'category',
+        'main': 'main',
         '': 'root' 
-      },
-
-      category: function( name ) {
-        console.log( name );
       },
 
       root: function() {
         location.hash = 'index';
+      },
+
+      main: function() {
+        ofertapp.utils.changePage( '#main', 'slide', false, false );
       }
     } );
 
