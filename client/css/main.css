@@ -31,7 +31,8 @@ div[data-role=content] a {
 }
 
 #main div[data-role=content] > div {
-  margin-top: 50%;
+  position: relative;
+  top: 30%;
 }
 
 #main div[data-role=content] a:first-child {
