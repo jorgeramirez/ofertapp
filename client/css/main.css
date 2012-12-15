@@ -1,0 +1,11 @@
+div[data-role=controlgroup] {
+  text-align: center;
+}
+
+div[data-role=controlgroup] .ui-controlgroup-controls {
+  display: block;
+}
+
+div[data-role=controlgroup] a {
+  width: 33%;
+}
