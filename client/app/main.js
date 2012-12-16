@@ -26,6 +26,9 @@ require(
 
     require( [ 'require',  'app'],
       function() {
+        //ofertapp.utils.getCurrentPosition( function( pos ) {
+          //ofertapp.currentPosition = pos;
+        //}, window );
       }
     );
   }

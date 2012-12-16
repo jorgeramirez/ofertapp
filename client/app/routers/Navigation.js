@@ -1,6 +1,6 @@
 define(
-  [ 'backbone' ],
-  function( Backbone ) {
+  [ 'backbone', 'collections/Offers' ],
+  function( Backbone, offers ) {
     
     var Navigation = Backbone.Router.extend( {
       routes: {
@@ -12,7 +12,8 @@ define(
         '': 'root',
         'seller-create' : 'sellerCreate',
         'offer-create' : 'offerCreate',
-        'offer-create-final' : 'offerCreateFinal'
+        'offer-create-final' : 'offerCreateFinal',
+        'new-offer': 'newOffer'
       },
 
       root: function() {
@@ -35,7 +36,6 @@ define(
         new ofertapp.views.CategorySelection(); 
       },
 
-
       searchMapResults: function() {
         var checked = ofertapp.utils.getCategoriesChecked( '#category-selection input[type=checkbox]' );
         ofertapp.utils.changePage( '#searchmap-results', 'slide', false, false );
@@ -43,19 +43,42 @@ define(
       },
 
       offerDetails: function( id ) {
-        new ofertapp.views.OfferDetails ( id );
+        new ofertapp.views.OfferDetails( id );
       },
 
       sellerCreate: function(){
-        ofertapp.utils.changePage('#seller-create', 'slide', false, false);
+        ofertapp.utils.changePage('#seller-create', 'slide', false, true);
+        new ofertapp.views.SellerCreate();
       },
 
       offerCreate: function(){
-        ofertapp.utils.changePage('#offer-create', 'slide', false, false);
+        new ofertapp.views.CreateOffer();
       },
 
       offerCreateFinal: function(){
-        ofertapp.utils.changePage('#offer-create-final', 'slide', false, false);
+        new ofertapp.views.OfferCreateFinal();
+      },
+
+      newOffer: function() {
+        var data = {};
+        $( '#offer-create form input' ).each( function() {
+          data[ $( this ).attr( 'name' ) ] = $( this ).attr( 'value' );
+        } );
+        data.categoryId = $( '#offer-create form select' ).attr( 'value' );
+        data.sellerId = $( '#offer-create-final form input[type=radio]' ).attr( 'value' );
+        data.photo = '';
+        data.userId = ofertapp.UserSession.get( 'idUser' );
+        data.currency = "PYG";
+        offers.create( data, {
+          url: window.SERVER_URL + '/offer',
+          success: function( col, response ) {
+            console.log( 'created!!!' );
+            console.log( response );
+            ofertapp.utils.changePage( '#offer-details', 'slide', false, true );
+            new ofertapp.views.OfferDetails( response.idOffer ); 
+          },
+          wait: true
+        } );
       }
 
     } );

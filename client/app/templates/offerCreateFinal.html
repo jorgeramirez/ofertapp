@@ -1,0 +1,10 @@
+<form data-ajax="false">
+  <fieldset data-role="controlgroup">
+    <legend>Seleccionar Negocio</legend>
+    
+    <% _.forEach( sellers, function( s ) {  %>
+      <input type="radio" name="radio-choice" id="rc-<%- s.idSeller %>" value="<%- s.idSeller %>" checked="checked" />
+      <label for="rc-<%- s.idSeller %>"><%- s.sellerName %></label>
+    <% } ); %>
+  </fieldset>
+</form>

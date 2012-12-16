@@ -9,11 +9,12 @@ define(
       },
 
       initialize: function() {
-        ofertapp.auth.facebook.init();
+        //ofertapp.auth.facebook.init();
       },
 
       loginHandler: function() {
         console.log( 'hola' );
+        ofertapp.auth.facebook.init();
       }
     } );
     

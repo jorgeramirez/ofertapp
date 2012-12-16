@@ -59,11 +59,10 @@ function addUser() {
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam("userID", $user->userID);
+        $stmt->bindParam("userID", $user->userIDFb);
         $stmt->bindParam("mail", $user->mail);
         $stmt->execute();
-        echo 'user'.$user->userID;
-        $user->id = $db->lastInsertId();
+        $user->idUser = $db->lastInsertId();
         $db = null;
         echo json_encode($user);
     } catch(PDOException $e) {
