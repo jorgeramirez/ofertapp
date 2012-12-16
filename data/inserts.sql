@@ -26,12 +26,6 @@ SET time_zone = "+00:00";
 -- Volcado de datos para la tabla 'category'
 --
 
-INSERT INTO category (idCategory, categoryName, smallPhoto, photo) VALUES
-(1, 'Bebidas', NULL, NULL),
-(2, 'Comidas', NULL, NULL),
-(3, 'Ropas', NULL, NULL),
-(4, 'Electrónicos', NULL, NULL),
-(5, 'Cigarrillos', NULL, NULL);
 
 
 -- --------------------------------------------------------
