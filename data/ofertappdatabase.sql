@@ -37,14 +37,14 @@ CREATE TABLE IF NOT EXISTS `category` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `offert`
+-- Estructura de tabla para la tabla `offer`
 --
 
-CREATE TABLE IF NOT EXISTS `offert` (
-  `idOffert` int(11) NOT NULL AUTO_INCREMENT,
-  `offertName` varchar(200) COLLATE utf8_bin NOT NULL,
-  `offertDescription` varchar(500) COLLATE utf8_bin DEFAULT NULL,
-  `date` date NOT NULL,
+CREATE TABLE IF NOT EXISTS `offer` (
+  `idOffer` int(11) NOT NULL AUTO_INCREMENT,
+  `offerName` varchar(200) COLLATE utf8_bin NOT NULL,
+  `offerDescription` varchar(500) COLLATE utf8_bin DEFAULT NULL,
+  `date` datetime NOT NULL,
   `rating` int(11) NOT NULL DEFAULT '0',
   `ratingsCount` int(11) NOT NULL DEFAULT '0',
   `photo` varchar(100) COLLATE utf8_bin DEFAULT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `offert` (
   `sellerId` int(11) NOT NULL,
   `categoryId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
-  PRIMARY KEY (`idOffert`),
+  PRIMARY KEY (`idOffer`),
   KEY `sellerId` (`sellerId`),
   KEY `categoryId` (`categoryId`),
   KEY `userId` (`userId`)
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `idUser` int(11) NOT NULL AUTO_INCREMENT,
   `userIDFb` varchar(100) COLLATE utf8_bin NOT NULL,
   `mail` varchar(50) COLLATE utf8_bin DEFAULT NULL,
-  `offertsCount` int(11) NOT NULL DEFAULT '0',
+  `offersCount` int(11) NOT NULL DEFAULT '0',
   `rating` int(11) NOT NULL DEFAULT '0',
   `ratingsCount` int(11) NOT NULL DEFAULT '0',
   `creationDate` datetime NOT NULL,
@@ -97,12 +97,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 --
--- Filtros para la tabla `offert`
+-- Filtros para la tabla `offer`
 --
-ALTER TABLE `offert`
-  ADD CONSTRAINT `offert_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`idUser`),
-  ADD CONSTRAINT `offert_ibfk_2` FOREIGN KEY (`categoryId`) REFERENCES `category` (`idCategory`),
-  ADD CONSTRAINT `offert_ibfk_3` FOREIGN KEY (`sellerId`) REFERENCES `seller` (`idSeller`);
+ALTER TABLE `offer`
+  ADD CONSTRAINT `offer_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`idUser`),
+  ADD CONSTRAINT `offer_ibfk_2` FOREIGN KEY (`categoryId`) REFERENCES `category` (`idCategory`),
+  ADD CONSTRAINT `offer_ibfk_3` FOREIGN KEY (`sellerId`) REFERENCES `seller` (`idSeller`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

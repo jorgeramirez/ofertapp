@@ -1,53 +1,53 @@
 ﻿<?php
 /* 
 // Ruteo Ofertas
-$app->get('/offert', 'getOffert'); //Todas las ofertas
-$app->get('/offert/user/:id', 'getOffertByUser'); //Todas las ofertas de un usuario dado
-$app->get('/offert/seller/:id', 'getOffertBySeller'); //Todas las ofertas de un negocio
-$app->get('/offert/category/:id', 'getOffertByCategory'); //Todas las ofertas de una categoria
-$app->get('/offert/recent/category/:id', 'getRecentOffertByCategory'); //Todas las ofertas recientes (Menor a un día)
-$app->get('/offert/:id','getOffertById'); //Una oferta
-$app->post('/offert', 'addOffert');
-$app->delete('/offert/:id', 'deleteOffert');
-$app->put('/offert/:id', 'updateOffert');
+$app->get('/offer', 'getOffer'); //Todas las ofertas
+$app->get('/offer/user/:id', 'getOfferByUser'); //Todas las ofertas de un usuario dado
+$app->get('/offer/seller/:id', 'getOfferBySeller'); //Todas las ofertas de un negocio
+$app->get('/offer/category/:id', 'getOfferByCategory'); //Todas las ofertas de una categoria
+$app->get('/offer/recent/category/:id', 'getRecentOfferByCategory'); //Todas las ofertas recientes (Menor a un día)
+$app->get('/offer/:id','getOfferById'); //Una oferta
+$app->post('/offer', 'addOffer');
+$app->delete('/offer/:id', 'deleteOffer');
+$app->put('/offer/:id', 'updateOffer');
 */
 
 // Parameters
 $daysFrame = -2;
 
 //Todas las ofertas
-function getOffert() {
-    $sql = "select * FROM offert ORDER BY date";
+function getOffer() {
+    $sql = "select * FROM offer ORDER BY date";
     try {
         $db = getConnection();
         $stmt = $db->query($sql);
         $oferta = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-        echo '{"Offert": ' . json_encode($oferta) . '}';
+        echo '{"Offer": ' . json_encode($oferta) . '}';
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
 //Una oferta especifica
-function getOffertById($id) {
-    $sql = "SELECT * FROM offert WHERE idOffert=:id";
+function getOfferById($id) {
+    $sql = "SELECT * FROM offer WHERE idOffer=:id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindParam("id", $id);
         $stmt->execute();
-        $Offert = $stmt->fetchObject();
+        $Offer = $stmt->fetchObject();
         $db = null;
-        echo json_encode($Offert);
+        echo json_encode($Offer);
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
 //Las ofertas de un usuario
-function getOffertByUser($id){
-    $sql = "SELECT * FROM offert WHERE userId=:id LIMIT 0, 30";
+function getOfferByUser($id){
+    $sql = "SELECT * FROM offer WHERE userId=:id LIMIT 0, 30";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -55,15 +55,15 @@ function getOffertByUser($id){
         $stmt->execute();
         $oferta = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-        echo '{"Offert": ' . json_encode($oferta) . '}';
+        echo '{"Offer": ' . json_encode($oferta) . '}';
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
 //Las ofertas de un negocio
-function getOffertBySeller($id){
-    $sql = "SELECT * FROM offert WHERE sellerId=:id LIMIT 0, 30";
+function getOfferBySeller($id){
+    $sql = "SELECT * FROM offer WHERE sellerId=:id LIMIT 0, 30";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -71,15 +71,15 @@ function getOffertBySeller($id){
         $stmt->execute();
         $oferta = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-        echo '{"Offert": ' . json_encode($oferta) . '}';
+        echo '{"Offer": ' . json_encode($oferta) . '}';
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
 //Las ofertas de una categoria
-function getOffertByCategory($id){
-    $sql = "SELECT * FROM offert WHERE categoryId=:id LIMIT 0, 30";
+function getOfferByCategory($id){
+    $sql = "SELECT * FROM offer WHERE categoryId=:id LIMIT 0, 30";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -87,15 +87,15 @@ function getOffertByCategory($id){
         $stmt->execute();
         $oferta = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-        echo '{"Offert": ' . json_encode($oferta) . '}';
+        echo '{"Offer": ' . json_encode($oferta) . '}';
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
 //Las ofertas de una categoria
-function getRecentOffertByCategory($id){
-    $sql = "SELECT * FROM offert WHERE categoryId=:id and date > timestampadd(day, :daysFrame, now())";
+function getRecentOfferByCategory($id){
+    $sql = "SELECT * FROM offer WHERE categoryId=:id and date > timestampadd(day, :daysFrame, now())";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -104,7 +104,7 @@ function getRecentOffertByCategory($id){
         $stmt->execute();
         $oferta = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
-        echo '{"Offert": ' . json_encode($oferta) . '}';
+        echo '{"Offer": ' . json_encode($oferta) . '}';
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
@@ -112,18 +112,18 @@ function getRecentOffertByCategory($id){
 
 
 // Agregar Oferta
-function addOffert() {
+function addOffer() {
     $request = \Slim\Slim::getInstance()->request();
     $Oferta = json_decode($request->getBody());
 
-    $sql = "INSERT INTO offert (offertName, offertDescription, date, photo, price, currency, sellerId, categoryId, userId) VALUES ( :offertName, :offertDescription, NOW(), :photo, :price, :currency, :sellerId, :categoryId, :userId);";
+    $sql = "INSERT INTO offer (offerName, offerDescription, date, photo, price, currency, sellerId, categoryId, userId) VALUES ( :offerName, :offerDescription, NOW(), :photo, :price, :currency, :sellerId, :categoryId, :userId);";
 
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         
-        $stmt->bindParam("offertName", $Oferta->offertName);
-        $stmt->bindParam("offertDescription", $Oferta->offertDescription);
+        $stmt->bindParam("offerName", $Oferta->offerName);
+        $stmt->bindParam("offerDescription", $Oferta->offerDescription);
         //$stmt->bindParam("date",$Oferta->date);
         //$stmt->bindParam("rating",$Oferta->rating);
         //$stmt->bindParam("ratingsCount",$Oferta->ratingsCount);
@@ -144,17 +144,17 @@ function addOffert() {
 }
 
 // Actualiza Oferta
-function updateOffert($id) {
+function updateOffer($id) {
     $request = \Slim\Slim::getInstance()->request();
     $body = $request->getBody();
     $Oferta = json_decode($body);
-    $sql = "UPDATE offert SET offertName=:offertName, offertDescription=:offertDescription, date=:date, rating=:rating, ratingsCount=:ratingsCount, photo=:photo, price=:price, currency=:currency, sellerId=:sellerId, categoryId=:categoryId, userId=:userId WHERE idOffert=:id";
+    $sql = "UPDATE offer SET offerName=:offerName, offerDescription=:offerDescription, date=:date, rating=:rating, ratingsCount=:ratingsCount, photo=:photo, price=:price, currency=:currency, sellerId=:sellerId, categoryId=:categoryId, userId=:userId WHERE idOffer=:id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         
-        $stmt->bindParam("offertName", $Oferta->offertName);
-        $stmt->bindParam("offertDescription", $Oferta->offertDescription);
+        $stmt->bindParam("offerName", $Oferta->offerName);
+        $stmt->bindParam("offerDescription", $Oferta->offerDescription);
         $stmt->bindParam("date",$Oferta->date);
         $stmt->bindParam("rating",$Oferta->rating);
         $stmt->bindParam("ratingsCount",$Oferta->ratingsCount);
@@ -175,8 +175,8 @@ function updateOffert($id) {
 }
 
 // Borrar Oferta
-function deleteOffert($id) {
-    $sql = "DELETE FROM offert WHERE idOffert=:id";
+function deleteOffer($id) {
+    $sql = "DELETE FROM offer WHERE idOffer=:id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);

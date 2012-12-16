@@ -75,13 +75,13 @@ function updateUser($id) {
     $request = \Slim\Slim::getInstance()->request();
     $body = $request->getBody();
     $user = json_decode($body);
-    $sql = "UPDATE user SET userIDFb=:userID, mail=:mail, offertsCount=:offertsCount, rating=:rating, ratingsCount=:ratingCount, creationDate=:creationDate WHERE idUser=:id";
+    $sql = "UPDATE user SET userIDFb=:userID, mail=:mail, offersCount=:offersCount, rating=:rating, ratingsCount=:ratingCount, creationDate=:creationDate WHERE idUser=:id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindParam("userID", $user->userID);
         $stmt->bindParam("mail", $user->mail);
-        $stmt->bindParam("offertsCount", $user->offertsCount);
+        $stmt->bindParam("offersCount", $user->offersCount);
         $stmt->bindParam("rating", $user->rating);
         $stmt->bindParam("ratingsCount", $user->ratingsCount);
         $stmt->bindParam("creationDate", $user->creationDate);

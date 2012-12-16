@@ -49,7 +49,7 @@ INSERT INTO seller (idSeller, sellerName, address, latitude, longitude, photo) V
 -- Volcado de datos para la tabla 'user'
 --
 
-INSERT INTO `user` (idUser, userIDFb, mail, offertsCount, rating, ratingsCount, creationDate) VALUES
+INSERT INTO `user` (idUser, userIDFb, mail, offersCount, rating, ratingsCount, creationDate) VALUES
 (1, '4334269522120', 'nahuel.11990@gmail.com', 0, 0, 0, '2012-12-15 19:43:19'),
 (2, '4419074428396', 'santiago.kenshinvaldez@gmail.com', 0, 0, 0, '2012-12-15 19:44:47'),
 (3, '3507064649072', 'jorgeramirez1990@gmail.com', 0, 0, 0, '2012-12-15 19:53:24');
@@ -58,9 +58,9 @@ INSERT INTO `user` (idUser, userIDFb, mail, offertsCount, rating, ratingsCount, 
 -- --------------------------------------------------------
 
 --
--- Volcado de datos para la tabla 'offert'
+-- Volcado de datos para la tabla 'offer'
 --
 
-INSERT INTO offert (idOffert, offertName, offertDescription, `date`, rating, ratingsCount, photo, price, currency, sellerId, categoryId, userId) VALUES
+INSERT INTO offer (idOffer, offerName, offerDescription, `date`, rating, ratingsCount, photo, price, currency, sellerId, categoryId, userId) VALUES
 (1, 'Remeras Microsoft', 'Remeras de Microsoft en el Hackaton', '2012-12-15', 0, 0, NULL, 0, 'PYG', 1, 3, 1),
 (2, 'Coca Cola Barato!', NULL, '2012-12-15', 0, 0, NULL, 9500, 'PYG', 2, 1, 2);

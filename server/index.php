@@ -9,7 +9,7 @@ $app = new \Slim\Slim();
 include 'user.php';
 include 'category.php';
 include 'seller.php';
-include 'offert.php';
+include 'offer.php';
 
 /*
  *
@@ -32,16 +32,16 @@ $app->post('/category', 'addCategory');
 $app->delete('/category/:id', 'deleteCategory');
 $app->put('/category/:id', 'updateCategory');
 
-// Offerts
-$app->get('/offert', 'getOffert'); //Todas las ofertas
-$app->get('/offert/user/:id', 'getOffertByUser'); //Todas las ofertas de un usuario dado
-$app->get('/offert/seller/:id', 'getOffertBySeller'); //Todas las ofertas de un negocio
-$app->get('/offert/category/:id', 'getOffertByCategory'); //Todas las ofertas de una categoria
-$app->get('/offert/recent/category/:id', 'getRecentOffertByCategory'); //Todas las ofertas recientes (Menor a un día)
-$app->get('/offert/:id','getOffertById'); //Una oferta
-$app->post('/offert', 'addOffert');
-$app->delete('/offert/:id', 'deleteOffert');
-$app->put('/offert/:id', 'updateOffert');
+// Offers
+$app->get('/offer', 'getOffer'); //Todas las ofertas
+$app->get('/offer/user/:id', 'getOfferByUser'); //Todas las ofertas de un usuario dado
+$app->get('/offer/seller/:id', 'getOfferBySeller'); //Todas las ofertas de un negocio
+$app->get('/offer/category/:id', 'getOfferByCategory'); //Todas las ofertas de una categoria
+$app->get('/offer/recent/category/:id', 'getRecentOfferByCategory'); //Todas las ofertas recientes (Menor a un día)
+$app->get('/offer/:id','getOfferById'); //Una oferta
+$app->post('/offer', 'addOffer');
+$app->delete('/offer/:id', 'deleteOffer');
+$app->put('/offer/:id', 'updateOffer');
 
 // Sellers (Negocios)
 $app->get('/seller', 'getSeller'); //Todos los negocios
