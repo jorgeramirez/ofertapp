@@ -95,7 +95,7 @@ function getOfferByCategory($id){
 
 //Las ofertas de una categoria
 function getRecentOfferByCategory($id){
-    $sql = "SELECT offer.*,seller.latitude, seller.longitude FROM offer,seller WHERE categoryId=:id and date > timestampadd(day, :daysFrame, now()) and seller.idSeller = offer.sellerId";
+    $sql = "SELECT offer.*,seller.latitude, seller.longitude, category.smallPhoto FROM offer,seller,category WHERE offer.categoryId=:id and date > timestampadd(day, :daysFrame, now()) and seller.idSeller = offer.sellerId and offer.categoryId = category.idCategory";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);

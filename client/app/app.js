@@ -31,6 +31,7 @@ define(
           FB: {
             INIT_PARAMS: {
               appId: '452513154816194',
+              //appId: '380110662082168',
               status: true,
               cookie: true,
               xfbml: true,

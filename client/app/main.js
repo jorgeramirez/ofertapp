@@ -23,7 +23,7 @@ require(
     // framework has been loaded
     
     window.SERVER_URL = '/server/index.php';
-
+    //window.SERVER_URL = '/ofertapp/server/index.php';
     require( [ 'require',  'app'],
       function() {
       }
