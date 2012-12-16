@@ -8,7 +8,7 @@ define(
         'category-selection': 'searchCategorySelection',
         'searchmap-results': 'searchMapResults',
         'index': 'index',
-        'offer-details': 'offerDetails',
+        'offer-details-:id': 'offerDetails',
         '': 'root',
         'seller-create' : 'sellerCreate',
         'offer-create' : 'offerCreate',
@@ -42,8 +42,8 @@ define(
         new ofertapp.views.SearchMapResults( checked );
       },
 
-      offerDetails: function() {
-        ofertapp.utils.changePage( '#offer-details', 'slide', false, false );
+      offerDetails: function( id ) {
+        new ofertapp.views.OfferDetails ( id );
       },
 
       sellerCreate: function(){

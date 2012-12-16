@@ -2,11 +2,13 @@ define(
   [ 
     'backbone', 'routers/Navigation', 'helpers/utils', 'helpers/auth/Facebook',
     'views/SearchMapResults', 'views/IndexPage', 'views/CategorySelection',
+    'views/OfferDetails',
     'models/Category'
   ],
   
   function( Backbone, NavigationRouter, utils, FacebookAuth, 
             SearchMapResults, IndexPage, CategorySelection,
+            OfferDetails,
             Category ) {
     $(function() {
       
@@ -14,7 +16,8 @@ define(
         views: {
           SearchMapResults: SearchMapResults,
           IndexPage: IndexPage,
-          CategorySelection: CategorySelection
+          CategorySelection: CategorySelection,
+          OfferDetails: OfferDetails
         },
         models: {
           Category: Category
