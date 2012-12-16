@@ -30,7 +30,7 @@ define(
         defaults: {
           FB: {
             INIT_PARAMS: {
-              appId: '380110662082168',
+              appId: '452513154816194',
               status: true,
               cookie: true,
               xfbml: true,
