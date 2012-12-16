@@ -44,6 +44,21 @@ define(
       } );
     };
 
+    utils.getCategoriesChecked = function( query ) {
+      var checked = []; 
+      $( query )
+        .filter( '.custom' ).each( function () {
+          var id = $( this ).attr( 'id' ).split( 'cb-' )[1];
+          if( $( this ).is( ':checked' ) && /[0-9]+/.test( id ) ) {
+            checked.push( id );
+          }else{
+            return;
+          }
+      } );
+
+      return checked;
+    };
+
     return utils;
   }
 );
