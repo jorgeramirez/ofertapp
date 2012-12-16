@@ -2,12 +2,12 @@ define(
   [ 'backbone', 'models/Offer' ],
   function( Backbone, Offer ) {
     var Offers = Backbone.Collection.extend( {
-      model: Offers,
+      model: Offer,
       
-      url: window.SERVER_URL + '/offert/category/',
+      url: window.SERVER_URL + '/offer/recent/category/',
       
       parse: function( response ) {
-        return response.Offert;
+        return response.Offer;
       }
     } );
 
