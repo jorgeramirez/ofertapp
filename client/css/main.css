@@ -47,3 +47,7 @@ div[data-role=content] a {
 .info-window {
   height: 100px;
 }
+
+.ui-field-contain .ui-controlgroup-controls {
+  width: 100%;
+}
