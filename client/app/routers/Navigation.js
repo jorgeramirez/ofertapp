@@ -9,7 +9,10 @@ define(
         'searchmap-results': 'searchMapResults',
         'index': 'index',
         'offer-details': 'offerDetails',
-        '': 'root'
+        '': 'root',
+        'seller-create' : 'sellerCreate',
+        'offer-create' : 'offerCreate',
+        'offer-create-final' : 'offerCreateFinal'
       },
 
       root: function() {
@@ -39,7 +42,20 @@ define(
 
       offerDetails: function() {
         ofertapp.utils.changePage( '#offer-details', 'slide', false, false );
+      },
+
+      sellerCreate: function(){
+        ofertapp.utils.changePage('#seller-create', 'slide', false, false);
+      },
+
+      offerCreate: function(){
+        ofertapp.utils.changePage('#offer-create', 'slide', false, false);
+      },
+
+      offerCreateFinal: function(){
+        ofertapp.utils.changePage('#offer-create-final', 'slide', false, false);
       }
+
     } );
 
     return Navigation;

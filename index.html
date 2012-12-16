@@ -110,5 +110,81 @@
       <div>bla bla bla bla</div>
     </div>
   </div>
+
+  <!-- seller create -->
+  <div id="seller-create" data-role="page" data-theme="d">
+    <div data-role="header">
+      <h1> Agregar Negocio </h1>
+    </div>
+    <div data-role="content">
+      <form data-ajax="false">
+        <input type="text" name="sellername" id="sellername" value="" placeholder="Nombre"/>
+        <a data-role="button" href="" data-icon="check" data-iconpos="left" data-ajax="false" style="margin: 0 auto;">
+          Ok
+        </a>
+      </form>
+    </div>  
+  </div>
+
+  <!-- offer create -->
+  <div id="offer-create" data-role="page" data-theme="d">
+    <div data-role="header">
+        <a data-role="button" href="#offer-create-final" data-icon="arrow-r" data-iconpos="left"
+         class="ui-btn-right" data-ajax="false">
+          Siguiente
+        </a>
+      <h1> Agregar Oferta </h1>
+    </div>
+    <div data-role="content">
+      <form data-ajax="false">
+        <input type="text" name="offername" id="offername" value="" placeholder="Nombre"/>
+        <input type="text" name="offerdescription" id="offerdescription" value="" placeholder="Descripcion"/>
+        <input type="number" name="price" id="price" value="" placeholder="Precio"/>
+      </form>
+    </div>  
+  </div>
+
+  <!-- offer create final -->
+  <div id="offer-create-final" data-role="page" data-theme="d">
+    <div data-role="header">
+      <a data-role="button" href="" data-icon="arrow-l" data-iconpos="left"
+          data-ajax="false">
+          Atras
+      </a>
+      <h1> Agregar Oferta </h1>
+      <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">    
+        <a data-role="button" href="#seller-create" data-icon="plus" data-iconpos="left"
+          data-ajax="false">
+          Nuevo
+        </a>
+        <a data-role="button" href="" data-icon="check" data-iconpos="left"
+          data-ajax="false">
+          Ok
+        </a>
+      </div>
+    
+    </div>
+    <div data-role="content">
+      <form data-ajax="false">
+        <fieldset data-role="controlgroup">
+  <legend>Choose a pet:</legend>
+      <input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" checked="checked" />
+      <label for="radio-choice-1">Cat</label>
+
+      <input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2"  />
+      <label for="radio-choice-2">Dog</label>
+
+      <input type="radio" name="radio-choice" id="radio-choice-3" value="choice-3"  />
+      <label for="radio-choice-3">Hamster</label>
+
+      <input type="radio" name="radio-choice" id="radio-choice-4" value="choice-4"  />
+      <label for="radio-choice-4">Lizard</label>
+</fieldset>
+      </form>
+    </div>  
+  </div>
+
+
+
 </body>
 </html>
