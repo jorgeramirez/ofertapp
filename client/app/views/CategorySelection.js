@@ -32,7 +32,7 @@ define(
         var me = this;
         
         me.$( 'div.placeholder' ).replaceWith( me.categoriesTpl( { categories: me.collection.toJSON() } ) );
-        ofertapp.utils.changePage( '#category-selection', 'none', false, false );
+        ofertapp.utils.changePage( '#category-selection', 'slide', false, false );
       }
     } );
     

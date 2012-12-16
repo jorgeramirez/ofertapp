@@ -1,8 +1,12 @@
 define(
-  [ 'backbone', 'collections/Offers' ],
-  function( Backbone, offers ) {
+  [ 'backbone', 'collections/Offers', 'text!templates/offerInfoWindow.html' ],
+  function( Backbone, offers, infoWindowTpl ) {
     var SearchMapResults = Backbone.View.extend( {
       el: '#searchmaps-result',
+      
+      collection: offers,
+
+      offerInfoWindowTpl: _.template( infoWindowTpl ),
 
       initialize: function( categories ) {
         var me = this;
@@ -11,6 +15,8 @@ define(
         $( function() {
           ofertapp.utils.getCurrentPosition( me.locationHandler, me );
         } );
+
+        //me.collection.on( 'change', me.onModelAdd, me);
       },
 
       locationHandler: function( pos ) {
@@ -24,16 +30,48 @@ define(
         var map = ofertapp.currentMap = new google.maps.Map( document.getElementById( 'map-canvas' ), mapOpts );
         google.maps.event.addListenerOnce( map, 'idle', function() { 
           google.maps.event.trigger( ofertapp.currentMap,'resize' );
-          me.drawMarkers( mapOpts.center, map );
+          
+          me.collection.reset();
+          
+          me.categories.forEach( function( id ) {
+            
+            me.collection.fetch({
+              success: function( c ) {
+                if( c.length === 0 ){
+                  return;
+                }
+                me.drawMarkers( mapOpts.center, map, c.toJSON() );
+              },
+              error: function( c ) {
+                console.log( 'error!!!!' );
+              },
+              url: me.collection.url + id
+            });
+          } );
+          
+          //me.drawMarkers( mapOpts.center, map );
         } );
       },
 
-      drawMarkers: function( pos, map ) {
-        var marker = ofertapp.utils.markerFactory( pos, map, 'hello' );
-        var content = '<div class="info-window"><strong>Producto Uno</strong><hr><p>Precio: 1000 Gs </p> <a href="#offer-details">Ver Oferta</a></div>';
-        var infoWindow = ofertapp.utils.infoWindowsFactory( content );
-        google.maps.event.addListener( marker, 'click', function() {
-          infoWindow.open( map, marker );
+      onModelAdd: function( model ) {
+        console.log( model ); 
+      },
+
+      drawMarkers: function( pos, map, collection ) {
+        var me = this;
+        
+        function aux( offer ) {
+          var marker = ofertapp.utils.markerFactory( pos, map, offer.offerName );
+          var content = me.offerInfoWindowTpl( { offer: offer } );
+          var infoWindow = ofertapp.utils.infoWindowsFactory( content );
+          
+          google.maps.event.addListener( marker, 'click', function() {
+            infoWindow.open( map, marker );
+          } );
+        }
+
+        collection.forEach( function( offer ) {
+          aux( offer );
         } );
       }
     } );

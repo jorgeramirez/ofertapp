@@ -2,9 +2,9 @@ define(
   [ 'backbone' ],
   function( Backbone ) {
     var Offer = Backbone.Model.extend( {
-      idAttribute: 'idOffert',
+      idAttribute: 'idOffer',
       defaults: {
-        idOffert: null
+        idOffer: null
       } 
     } );
 
