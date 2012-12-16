@@ -55,13 +55,14 @@ function getUserByOauth($id) {
 function addUser() {
     $request = \Slim\Slim::getInstance()->request();
     $user = json_decode($request->getBody());
-    $sql = "INSERT INTO `user` (userIDFb, mail, creationDate) VALUES(:userID, :mail, NOW())";
+    $sql = "INSERT INTO user (userIDFb, mail, creationDate) VALUES(:userID, :mail, NOW())";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindParam("userID", $user->userID);
         $stmt->bindParam("mail", $user->mail);
         $stmt->execute();
+        echo 'user'.$user->userID;
         $user->id = $db->lastInsertId();
         $db = null;
         echo json_encode($user);

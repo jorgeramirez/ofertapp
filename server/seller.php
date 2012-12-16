@@ -9,6 +9,7 @@ $app->delete('/seller/:id', 'deleteSeller');
 $app->put('/seller/:id', 'updateSeller');
 */
 
+$radius = 1;
 
 function getSeller() {
     $sql = "select * FROM seller ORDER BY sellerName";
@@ -63,7 +64,7 @@ function updateSeller($id) {
     $request = \Slim\Slim::getInstance()->request();
     $body = $request->getBody();
     $Seller = json_decode($body);
-    $sql = "UPDATE seller SET sellerName, address, latitude, longitude, photo WHERE idSeller=:id";
+    $sql = "UPDATE seller SET sellerName=:sellerName, address=:address, latitude=:latitude, longitude=:longitude, photo=:photo WHERE idSeller=:id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -95,13 +96,14 @@ function deleteSeller($id) {
 }
 
 function getSellerByLatLon($lat,$lon){
-    $sql = "select *, ( 6371 * acos( cos( radians( :latitude ) ) * cos( radians( latitude ) ) * cos( radians( longitude )- radians( :longitude ) ) + sin( radians( :latitude ) ) * sin( radians( latitude ) ) ) ) AS distance FROM seller HAVING distance <= 1 ORDER BY distance ASC";
+    $sql = "select *, ( 6371 * acos( cos( radians( :latitude ) ) * cos( radians( latitude ) ) * cos( radians( longitude )- radians( :longitude ) ) + sin( radians( :latitude ) ) * sin( radians( latitude ) ) ) ) AS distance FROM seller HAVING distance <= :radius ORDER BY distance ASC";
 
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindParam("latitude", $lat);
         $stmt->bindParam("longitude", $lon);
+        $stmt->bindParam("radius", $GLOBALS['radius']);
         $stmt->execute();
         $seller = $stmt->fetchAll(PDO::FETCH_OBJ);
         $db = null;
