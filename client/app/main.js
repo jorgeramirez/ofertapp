@@ -10,7 +10,8 @@ require.config( {
   paths: {
     'underscore': 'lib/lodash.min',
     'backbone': 'lib/backbone-0.9.2',
-    'facebookuser': 'lib/FacebookUser'
+    'facebookuser': 'lib/FacebookUser',
+    'text': 'lib/require/text'
   },
   baseUrl: 'client/app'
 } );
@@ -20,6 +21,8 @@ require(
 
   function( require, _, Backbone ) {
     // framework has been loaded
+    
+    window.SERVER_URL = '/ofertapp/server/index.php';
 
     require( [ 'require',  'app'],
       function() {

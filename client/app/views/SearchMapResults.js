@@ -1,12 +1,13 @@
 define(
-  [ 'backbone' ],
-  function( Backbone ) {
+  [ 'backbone', 'collections/Offers' ],
+  function( Backbone, offers ) {
     var SearchMapResults = Backbone.View.extend( {
       el: '#searchmaps-result',
 
-      initialize: function() {
+      initialize: function( categories ) {
         var me = this;
-
+        
+        me.categories = categories;
         $( function() {
           ofertapp.utils.getCurrentPosition( me.locationHandler, me );
         } );

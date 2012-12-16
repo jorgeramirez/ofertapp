@@ -32,12 +32,14 @@ define(
       },
 
       searchCategorySelection: function() {
-        ofertapp.utils.changePage( '#category-selection', 'slide', false, false );
+        new ofertapp.views.CategorySelection(); 
       },
 
+
       searchMapResults: function() {
+        var checked = ofertapp.utils.getCategoriesChecked( '#category-selection input[type=checkbox]' );
         ofertapp.utils.changePage( '#searchmap-results', 'slide', false, false );
-        new ofertapp.views.SearchMapResults();
+        new ofertapp.views.SearchMapResults( checked );
       },
 
       offerDetails: function() {

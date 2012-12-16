@@ -1,20 +1,26 @@
 define( 
   [ 
     'backbone', 'routers/Navigation', 'helpers/utils', 'helpers/auth/Facebook',
-    'views/SearchMapResults', 'views/IndexPage'
+    'views/SearchMapResults', 'views/IndexPage', 'views/CategorySelection',
+    'models/Category'
   ],
   
   function( Backbone, NavigationRouter, utils, FacebookAuth, 
-            SearchMapResults, IndexPage ) {
+            SearchMapResults, IndexPage, CategorySelection,
+            Category ) {
     $(function() {
       
       window.ofertapp = window.ofertapp || {
         views: {
           SearchMapResults: SearchMapResults,
-          IndexPage: IndexPage
+          IndexPage: IndexPage,
+          CategorySelection: CategorySelection
         },
-        models: {},
-        collections: {},
+        models: {
+          Category: Category
+        },
+        collections: {
+        },
         routers: {
           navigation: new NavigationRouter()
         },
@@ -33,7 +39,8 @@ define(
         utils: utils,
         auth: {
           facebook: FacebookAuth
-        }
+        },
+        serverUrl: '/index.php'
       };
       
       //ofertapp.auth.facebook.init();

@@ -1,0 +1,10 @@
+<form data-ajax="false">
+  <div id="checkboxes1" data-role="fieldcontain">
+    <fieldset data-role="controlgroup" data-type="vertical">
+      <% _.forEach( categories, function( c ) {  %>
+        <input id="cb-<%- c.idCategory %>"name="category" type="checkbox" class="custom">
+        <label for="cb-<%- c.idCategory %>"> <%- c.categoryName %> </label>
+      <% } ); %>    
+    </fieldset>
+  </div>
+</form>
