@@ -18,7 +18,32 @@ define(
     utils.changePage = function( viewID, effect, direction, updateHash ) {
         $.mobile.changePage( viewID, { transition: effect, reverse:direction, changeHash: updateHash} );
     };
-    
+   
+    // get current position through navigator.geolocation
+    utils.getCurrentPosition = function( callback, scope ) {
+      if( navigator.geolocation ) {
+        navigator.geolocation.getCurrentPosition( function( pos ) {
+          callback.call( scope || this, pos ); 
+        } );
+      }else{
+        alert( 'Su navegador no soporta Geolocalizacion' );
+      }
+    };
+
+    utils.markerFactory = function( pos, map, title ) {
+      return new google.maps.Marker( {
+        position: pos,
+        map: map,
+        title: title
+      } );  
+    };
+
+    utils.infoWindowsFactory = function( content ) {
+      return new InfoBubble( {
+        content: content
+      } );
+    };
+
     return utils;
   }
 );

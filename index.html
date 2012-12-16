@@ -17,7 +17,9 @@
     });
   </script>
   <script data-main="app/main" type="text/javascript" src="client/app/lib/jquery.mobile-1.2.0.min.js"></script>
-  
+  <script data-main="app/main" type="text/javascript" src="client/app/lib/infobubble.js"></script>
+
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
   <script type="text/javascript" src="https://connect.facebook.net/en_US/all.js"></script>
   
   <script data-main="client/app/main" type="text/javascript" src="client/app/lib/require/require.js"></script>
@@ -46,13 +48,66 @@
   <div id="main" data-role="page" data-theme="d">
     <div data-role="content">
       <div>
-        <a href="#" data-role="button">
+        <a href="#category-selection" data-role="button">
           Buscar Ofertas
         </a>
         <a href="#" data-role="button">
           Crear Oferta
         </a>
+        <!--<a href="#logout" data-role="button" style="margin-top: 10px;">-->
+          <!--Cerrar Sesi&oacute;n-->
+        <!--</a>-->
       </div>
+    </div>
+  </div>
+
+
+  <!-- category selection -->
+  <div id="category-selection" data-role="page" data-theme="d">
+    <div data-role="header">
+      <a data-role="button" href="#searchmap-results" data-icon="search" data-iconpos="left"
+         class="ui-btn-right" data-ajax="false">
+        Buscar
+      </a>
+      <h1> Categor&iacute;as</h1>
+    </div>
+    <div data-role="content">
+      <div>
+        <form data-ajax="false">
+          <div id="checkboxes1" data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-type="vertical">
+                <input id="checkbox1" name="category" type="checkbox">
+                <label for="checkbox1">
+                    Bebidas
+                </label>
+                <input id="checkbox2" name="category" type="checkbox">
+                <label for="checkbox2">
+                    Verduras
+                </label>
+            </fieldset>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- search map results -->
+  <div id="searchmap-results" data-role="page" data-theme="d">
+    <div data-role="header">
+      <h1> Mapa de Ofertas </h1>
+    </div>
+    <div data-role="content">
+      <div id="map-canvas"></div>
+    </div>
+  </div>
+  
+  <!-- offer details -->
+  <div id="offer-details" data-role="page" data-theme="d">
+    <div data-role="header">
+      <h1> Detalles de la Oferta </h1>
+    </div>
+    <div data-role="content">
+      <div>bla bla bla bla</div>
     </div>
   </div>
 </body>

@@ -1,12 +1,17 @@
 define( 
-  [ 'backbone', 'routers/Navigation', 'helpers/utils', 'helpers/auth/Facebook' ],
+  [ 
+    'backbone', 'routers/Navigation', 'helpers/utils', 'helpers/auth/Facebook',
+    'views/SearchMapResults', 'views/IndexPage'
+  ],
   
-  function( Backbone, NavigationRouter, utils, FacebookAuth ) {
+  function( Backbone, NavigationRouter, utils, FacebookAuth, 
+            SearchMapResults, IndexPage ) {
     $(function() {
       
       window.ofertapp = window.ofertapp || {
         views: {
-           
+          SearchMapResults: SearchMapResults,
+          IndexPage: IndexPage
         },
         models: {},
         collections: {},
@@ -31,7 +36,7 @@ define(
         }
       };
       
-      ofertapp.auth.facebook.init();
+      //ofertapp.auth.facebook.init();
       Backbone.history.start();
     });
   }

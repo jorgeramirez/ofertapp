@@ -18,6 +18,8 @@ define( [ 'facebookuser' ],
 
       user.on('facebook:connected', function(model, response) {
         console.log( "facebook:connected" );
+        location.hash = 'main';
+        ofertapp.utils.changePage( '#main', 'slide', false, false );
       });
 
       user.on('facebook:disconnected', function(model, response) {
