@@ -52,7 +52,7 @@ function addSeller() {
         $stmt->bindParam("longitude", $Seller->longitude);
         $stmt->bindParam("photo", $Seller->photo);
         $stmt->execute();
-        $Seller->id = $db->lastInsertId();
+        $Seller->idSeller = $db->lastInsertId();
         $db = null;
         echo json_encode($Seller);
     } catch(PDOException $e) {

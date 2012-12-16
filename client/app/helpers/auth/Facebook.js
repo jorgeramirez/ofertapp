@@ -1,6 +1,6 @@
 // Facebook auth
-define( [ 'facebookuser' ],
-  function( FacebookUser ) {
+define( [ 'facebookuser', 'models/User' ],
+  function( FacebookUser, User ) {
     var user;
     var Facebook = {}; 
     
@@ -19,6 +19,33 @@ define( [ 'facebookuser' ],
       user.on('facebook:connected', function(model, response) {
         console.log( "facebook:connected" );
         location.hash = 'main';
+        ofertapp.FbAuthResponse = response.authResponse;
+
+        var appUser = ofertapp.UserSession = new User( {
+          userIDFb: response.authResponse.userID
+        } );
+
+        appUser.fetch( {
+          url: appUser.url + '/oauth/' + response.authResponse.userID,
+          success: onSuccess,
+          error: onFailure
+        } );
+
+        function onSuccess( model, exists ) {
+          if( exists ) {
+            console.log( appUser );
+          }else{
+            ofertapp.UserSession = new User( {
+              userIDFb: response.authResponse.userID
+            } );
+            ofertapp.UserSession.save();
+          }
+        }
+
+        // user does not exits, create one
+        function onFailure() {
+        }
+
         ofertapp.utils.changePage( '#main', 'slide', false, false );
       });
 

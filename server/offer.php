@@ -129,13 +129,13 @@ function addOffer() {
         //$stmt->bindParam("ratingsCount",$Oferta->ratingsCount);
         $stmt->bindParam("photo",$Oferta->photo);
         $stmt->bindParam("price",$Oferta->price);
-        $stmt->bindParam("currency",$Oferta->currency);
+        $stmt->bindParam("currency", $Oferta->currency);
         $stmt->bindParam("sellerId",$Oferta->sellerId);
         $stmt->bindParam("categoryId",$Oferta->categoryId);
         $stmt->bindParam("userId",$Oferta->userId);
         
         $stmt->execute();
-        $Oferta->id = $db->lastInsertId();
+        $Oferta->idOffer = $db->lastInsertId();
         $db = null;
         echo json_encode($Oferta);
     } catch(PDOException $e) {

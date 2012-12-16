@@ -26,6 +26,9 @@ require(
     //window.SERVER_URL = '/ofertapp/server/index.php';
     require( [ 'require',  'app'],
       function() {
+        //ofertapp.utils.getCurrentPosition( function( pos ) {
+          //ofertapp.currentPosition = pos;
+        //}, window );
       }
     );
   }
