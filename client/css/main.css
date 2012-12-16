@@ -38,3 +38,12 @@ div[data-role=content] a {
 #main div[data-role=content] a:first-child {
   margin-bottom: 10px;
 }
+
+#map-canvas {
+  width: 100%;
+  height: 250px;
+}
+
+.info-window {
+  height: 100px;
+}
