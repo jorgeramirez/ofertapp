@@ -33,6 +33,7 @@ define(
         
         me.$( 'div.placeholder' ).empty().append( me.categoriesTpl( { categories: me.collection.toJSON() } ) );
         ofertapp.utils.changePage( '#category-selection', 'slide', false, false );
+        $('#category-selection').page("destroy").page();
       }
     } );
     
