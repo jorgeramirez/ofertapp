@@ -1,0 +1,10 @@
+<form data-ajax="false">
+  <input type="text" name="offerName" id="offername" value="" placeholder="Nombre"/>
+  <input type="text" name="offerDescription" id="offerdescription" value="" placeholder="Descripcion"/>
+  <input type="number" name="price" id="price" value="" placeholder="Precio"/>
+  <select name="categoryId">
+    <% _.forEach( categories, function( c ) {  %>
+      <option value="<%- c.idCategory %>"><%- c.categoryName %></option>
+    <% } ); %>
+  </select>
+</form>

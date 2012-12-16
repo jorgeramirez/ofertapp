@@ -60,10 +60,10 @@ $app->run();
 */
 
 function getConnection() {
-    $dbhost="localhost";
-    $dbuser="root";
-    $dbpass="Sacalvo123";
-    $dbname="ofertappdatabase";
+    $dbhost="212.1.210.181";
+    $dbuser="groupwe_ofertapp";
+    $dbpass="ofertapp";
+    $dbname="groupwe_ofertapp";
     $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $dbh;

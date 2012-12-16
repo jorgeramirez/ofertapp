@@ -27,7 +27,7 @@ define(
         };
 
         var map = ofertapp.currentMap = new google.maps.Map( document.getElementById( 'map-canvas' ), mapOpts );
-        google.maps.event.addListenerOnce( map, 'idle', function() { 
+        google.maps.event.addListenerOnce( map, 'idle', function() {
           google.maps.event.trigger( ofertapp.currentMap,'resize' );
           
           me.collection.reset();
@@ -53,15 +53,16 @@ define(
       },
 
       onModelAdd: function( model ) {
-        console.log( model ); 
+        console.log( model );
       },
 
       drawMarkers: function( map, collection ) {
         var me = this;
         
         function aux( offer ) {
+          console.log("cagada de pato");
           var pos = new google.maps.LatLng( offer.latitude, offer.longitude );
-          var marker = ofertapp.utils.markerFactory( pos, map, offer.offerName );
+          var marker = ofertapp.utils.markerFactory( pos, map, offer.offerName, offer.smallPhoto );
           var content = me.offerInfoWindowTpl( { offer: offer } );
           var infoWindow = ofertapp.utils.infoWindowsFactory( content );
           

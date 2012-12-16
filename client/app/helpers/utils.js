@@ -1,7 +1,7 @@
 define(
   [  ],
   function( ) {
-    var utils = {};    
+    var utils = {};
     
     // summary:
     //            A convenience method for accessing $mobile.changePage(), included
@@ -23,19 +23,21 @@ define(
     utils.getCurrentPosition = function( callback, scope ) {
       if( navigator.geolocation ) {
         navigator.geolocation.getCurrentPosition( function( pos ) {
-          callback.call( scope || this, pos ); 
+          callback.call( scope || this, pos );
         } );
       }else{
         alert( 'Su navegador no soporta Geolocalizacion' );
       }
     };
 
-    utils.markerFactory = function( pos, map, title ) {
+    utils.markerFactory = function( pos, map, title, icono ) {
+      console.log("icono>" + icono);
       return new google.maps.Marker( {
         position: pos,
         map: map,
-        title: title
-      } );  
+        title: title,
+        icon : 'http://ofertapp.azurewebsites.net/server/' + icono
+      } );
     };
 
     utils.infoWindowsFactory = function( content ) {
@@ -45,7 +47,7 @@ define(
     };
 
     utils.getCategoriesChecked = function( query ) {
-      var checked = []; 
+      var checked = [];
       $( query )
         .filter( '.custom' ).each( function () {
           var id = $( this ).attr( 'id' ).split( 'cb-' )[1];

@@ -2,13 +2,15 @@ define(
   [ 
     'backbone', 'routers/Navigation', 'helpers/utils', 'helpers/auth/Facebook',
     'views/SearchMapResults', 'views/IndexPage', 'views/CategorySelection',
-    'views/OfferDetails',
+    'views/OfferDetails', 'views/CreateOffer', 'views/OfferCreateFinal',
+    'views/SellerCreate',
     'models/Category'
   ],
   
   function( Backbone, NavigationRouter, utils, FacebookAuth, 
             SearchMapResults, IndexPage, CategorySelection,
-            OfferDetails,
+            OfferDetails, CreateOffer, OfferCreateFinal,
+            SellerCreate,
             Category ) {
     $(function() {
       
@@ -17,7 +19,10 @@ define(
           SearchMapResults: SearchMapResults,
           IndexPage: IndexPage,
           CategorySelection: CategorySelection,
-          OfferDetails: OfferDetails
+          OfferDetails: OfferDetails,
+          CreateOffer: CreateOffer,
+          OfferCreateFinal: OfferCreateFinal,
+          SellerCreate: SellerCreate
         },
         models: {
           Category: Category
@@ -30,7 +35,8 @@ define(
         defaults: {
           FB: {
             INIT_PARAMS: {
-              appId: '380110662082168',
+              appId: '452513154816194',
+              //appId: '380110662082168',
               status: true,
               cookie: true,
               xfbml: true,
@@ -46,8 +52,13 @@ define(
         serverUrl: '/index.php'
       };
       
-      //ofertapp.auth.facebook.init();
-      Backbone.history.start();
+      ofertapp.utils.getCurrentPosition( function( pos ) {
+        
+        ofertapp.currentPosition = pos;
+        ofertapp.auth.facebook.init();
+        Backbone.history.start();
+      
+      }, window );
     });
   }
 );

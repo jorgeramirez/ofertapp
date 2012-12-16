@@ -95,7 +95,7 @@ function getOfferByCategory($id){
 
 //Las ofertas de una categoria
 function getRecentOfferByCategory($id){
-    $sql = "SELECT offer.*,seller.latitude, seller.longitude FROM offer,seller WHERE categoryId=:id and date > timestampadd(day, :daysFrame, now()) and seller.idSeller = offer.sellerId";
+    $sql = "SELECT offer.*,seller.latitude, seller.longitude, category.smallPhoto FROM offer,seller,category WHERE offer.categoryId=:id and date > timestampadd(day, :daysFrame, now()) and seller.idSeller = offer.sellerId and offer.categoryId = category.idCategory";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -129,13 +129,13 @@ function addOffer() {
         //$stmt->bindParam("ratingsCount",$Oferta->ratingsCount);
         $stmt->bindParam("photo",$Oferta->photo);
         $stmt->bindParam("price",$Oferta->price);
-        $stmt->bindParam("currency",$Oferta->currency);
+        $stmt->bindParam("currency", $Oferta->currency);
         $stmt->bindParam("sellerId",$Oferta->sellerId);
         $stmt->bindParam("categoryId",$Oferta->categoryId);
         $stmt->bindParam("userId",$Oferta->userId);
         
         $stmt->execute();
-        $Oferta->id = $db->lastInsertId();
+        $Oferta->idOffer = $db->lastInsertId();
         $db = null;
         echo json_encode($Oferta);
     } catch(PDOException $e) {

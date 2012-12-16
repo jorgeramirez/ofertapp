@@ -45,12 +45,15 @@
   </div>
   
   <div id="main" data-role="page" data-theme="d">
+    <div data-role="header">
+      <h1>ofertapp</h1>
+    </div>
     <div data-role="content">
       <div>
         <a href="#category-selection" data-role="button" data-ajax="false">
           Buscar Ofertas
         </a>
-        <a href="#" data-role="button">
+        <a href="#offer-create" data-role="button" data-ajax="false">
           Crear Oferta
         </a>
         <!--<a href="#logout" data-role="button" style="margin-top: 10px;">-->
@@ -104,7 +107,7 @@
     </div>
     <div data-role="content">
       <form data-ajax="false">
-        <input type="text" name="sellername" id="sellername" value="" placeholder="Nombre"/>
+        <input type="text" name="sellerName" value="" placeholder="Nombre"/>
         <a data-role="button" href="" data-icon="check" data-iconpos="left" data-ajax="false" style="margin: 0 auto;">
           Ok
         </a>
@@ -122,19 +125,20 @@
       <h1> Agregar Oferta </h1>
     </div>
     <div data-role="content">
-      <form data-ajax="false">
-        <input type="text" name="offername" id="offername" value="" placeholder="Nombre"/>
-        <input type="text" name="offerdescription" id="offerdescription" value="" placeholder="Descripcion"/>
-        <input type="number" name="price" id="price" value="" placeholder="Precio"/>
-      </form>
+      <div class="placeholder"></div>
+      <!--<form data-ajax="false">-->
+        <!--<input type="text" name="offername" id="offername" value="" placeholder="Nombre"/>-->
+        <!--<input type="text" name="offerdescription" id="offerdescription" value="" placeholder="Descripcion"/>-->
+        <!--<input type="number" name="price" id="price" value="" placeholder="Precio"/>-->
+      <!--</form>-->
     </div>  
   </div>
 
   <!-- offer create final -->
   <div id="offer-create-final" data-role="page" data-theme="d">
     <div data-role="header">
-      <a data-role="button" href="" data-icon="arrow-l" data-iconpos="left"
-          data-ajax="false">
+      <a data-role="button" href="#offer-create" data-icon="arrow-l" data-iconpos="left"
+          data-ajax="true" onclick="history.">
           Atras
       </a>
       <h1> Agregar Oferta </h1>
@@ -143,7 +147,7 @@
           data-ajax="false">
           Nuevo
         </a>
-        <a data-role="button" href="" data-icon="check" data-iconpos="left"
+        <a data-role="button" href="#new-offer" data-icon="check" data-iconpos="left"
           data-ajax="false">
           Ok
         </a>
@@ -151,26 +155,9 @@
     
     </div>
     <div data-role="content">
-      <form data-ajax="false">
-        <fieldset data-role="controlgroup">
-  <legend>Choose a pet:</legend>
-      <input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" checked="checked" />
-      <label for="radio-choice-1">Cat</label>
-
-      <input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2"  />
-      <label for="radio-choice-2">Dog</label>
-
-      <input type="radio" name="radio-choice" id="radio-choice-3" value="choice-3"  />
-      <label for="radio-choice-3">Hamster</label>
-
-      <input type="radio" name="radio-choice" id="radio-choice-4" value="choice-4"  />
-      <label for="radio-choice-4">Lizard</label>
-</fieldset>
-      </form>
+      <div class="placeholder"></div>
     </div>  
   </div>
-
-
 
 </body>
 </html>
