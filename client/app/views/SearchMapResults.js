@@ -3,7 +3,7 @@ define(
   function( Backbone, offers, infoWindowTpl ) {
     var SearchMapResults = Backbone.View.extend( {
       el: '#searchmaps-result',
-      
+     
       collection: offers,
 
       offerInfoWindowTpl: _.template( infoWindowTpl ),
@@ -16,7 +16,6 @@ define(
           ofertapp.utils.getCurrentPosition( me.locationHandler, me );
         } );
 
-        //me.collection.on( 'change', me.onModelAdd, me);
       },
 
       locationHandler: function( pos ) {
@@ -40,16 +39,16 @@ define(
                 if( c.length === 0 ){
                   return;
                 }
-                me.drawMarkers( mapOpts.center, map, c.toJSON() );
+                me.drawMarkers( map, c.toJSON() );
               },
               error: function( c ) {
                 console.log( 'error!!!!' );
               },
-              url: me.collection.url + id
+              url: me.collection.url + id,
+              add: true
             });
           } );
           
-          //me.drawMarkers( mapOpts.center, map );
         } );
       },
 
@@ -57,10 +56,11 @@ define(
         console.log( model ); 
       },
 
-      drawMarkers: function( pos, map, collection ) {
+      drawMarkers: function( map, collection ) {
         var me = this;
         
         function aux( offer ) {
+          var pos = new google.maps.LatLng( offer.latitude, offer.longitude );
           var marker = ofertapp.utils.markerFactory( pos, map, offer.offerName );
           var content = me.offerInfoWindowTpl( { offer: offer } );
           var infoWindow = ofertapp.utils.infoWindowsFactory( content );
