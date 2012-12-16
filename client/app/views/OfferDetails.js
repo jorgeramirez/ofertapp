@@ -16,7 +16,7 @@ define(
 
       render: function() {
         this.$( 'div.placeholder' ).empty().append( this.template( { offer :this.model } ) );  
-        ofertapp.utils.changePage( '#offer-details', 'slide', false, false );
+        ofertapp.utils.changePage( '#offer-details', 'slide', false, true );
       }
 
     } );
