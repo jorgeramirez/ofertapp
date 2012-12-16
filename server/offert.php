@@ -5,11 +5,15 @@ $app->get('/offert', 'getOffert'); //Todas las ofertas
 $app->get('/offert/user/:id', 'getOffertByUser'); //Todas las ofertas de un usuario dado
 $app->get('/offert/seller/:id', 'getOffertBySeller'); //Todas las ofertas de un negocio
 $app->get('/offert/category/:id', 'getOffertByCategory'); //Todas las ofertas de una categoria
+$app->get('/offert/recent/category/:id', 'getRecentOffertByCategory'); //Todas las ofertas recientes (Menor a un día)
 $app->get('/offert/:id','getOffertById'); //Una oferta
 $app->post('/offert', 'addOffert');
 $app->delete('/offert/:id', 'deleteOffert');
 $app->put('/offert/:id', 'updateOffert');
 */
+
+// Parameters
+$daysFrame = -2;
 
 //Todas las ofertas
 function getOffert() {
@@ -89,12 +93,30 @@ function getOffertByCategory($id){
     }
 }
 
+//Las ofertas de una categoria
+function getRecentOffertByCategory($id){
+    $sql = "SELECT * FROM offert WHERE categoryId=:id and date > timestampadd(day, :daysFrame, now())";
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam("daysFrame", $GLOBALS['daysFrame']);
+        $stmt->bindParam("id", $id);
+        $stmt->execute();
+        $oferta = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        echo '{"Offert": ' . json_encode($oferta) . '}';
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+
 // Agregar Oferta
 function addOffert() {
     $request = \Slim\Slim::getInstance()->request();
     $Oferta = json_decode($request->getBody());
 
-    $sql = "INSERT INTO offert (offertName, offertDescription, date, rating, ratingsCount, photo, price, currency, sellerId, categoryId, userId) VALUES ( :offertName, :offertDescription, :date, :rating, :ratingsCount, :photo, :price, :currency, :sellerId, :categoryId, :userId);";
+    $sql = "INSERT INTO offert (offertName, offertDescription, date, photo, price, currency, sellerId, categoryId, userId) VALUES ( :offertName, :offertDescription, NOW(), :photo, :price, :currency, :sellerId, :categoryId, :userId);";
 
     try {
         $db = getConnection();
@@ -102,9 +124,9 @@ function addOffert() {
         
         $stmt->bindParam("offertName", $Oferta->offertName);
         $stmt->bindParam("offertDescription", $Oferta->offertDescription);
-        $stmt->bindParam("date",$Oferta->date);
-        $stmt->bindParam("rating",$Oferta->rating);
-        $stmt->bindParam("ratingsCount",$Oferta->ratingsCount);
+        //$stmt->bindParam("date",$Oferta->date);
+        //$stmt->bindParam("rating",$Oferta->rating);
+        //$stmt->bindParam("ratingsCount",$Oferta->ratingsCount);
         $stmt->bindParam("photo",$Oferta->photo);
         $stmt->bindParam("price",$Oferta->price);
         $stmt->bindParam("currency",$Oferta->currency);
@@ -133,6 +155,15 @@ function updateOffert($id) {
         
         $stmt->bindParam("offertName", $Oferta->offertName);
         $stmt->bindParam("offertDescription", $Oferta->offertDescription);
+        $stmt->bindParam("date",$Oferta->date);
+        $stmt->bindParam("rating",$Oferta->rating);
+        $stmt->bindParam("ratingsCount",$Oferta->ratingsCount);
+        $stmt->bindParam("photo",$Oferta->photo);
+        $stmt->bindParam("price",$Oferta->price);
+        $stmt->bindParam("currency",$Oferta->currency);
+        $stmt->bindParam("sellerId",$Oferta->sellerId);
+        $stmt->bindParam("categoryId",$Oferta->categoryId);
+        $stmt->bindParam("userId",$Oferta->userId);
         $stmt->bindParam("id", $id);
         
         $stmt->execute();
@@ -156,4 +187,5 @@ function deleteOffert($id) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
+
 ?>

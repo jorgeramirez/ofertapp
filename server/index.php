@@ -37,6 +37,7 @@ $app->get('/offert', 'getOffert'); //Todas las ofertas
 $app->get('/offert/user/:id', 'getOffertByUser'); //Todas las ofertas de un usuario dado
 $app->get('/offert/seller/:id', 'getOffertBySeller'); //Todas las ofertas de un negocio
 $app->get('/offert/category/:id', 'getOffertByCategory'); //Todas las ofertas de una categoria
+$app->get('/offert/recent/category/:id', 'getRecentOffertByCategory'); //Todas las ofertas recientes (Menor a un día)
 $app->get('/offert/:id','getOffertById'); //Una oferta
 $app->post('/offert', 'addOffert');
 $app->delete('/offert/:id', 'deleteOffert');
